@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadzIn – We Learn, We Earn, We Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f5a623;
+    --gold-light: #ffd07b;
+    --gold-dark: #c47d0e;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --dark3: #242424;
+    --white: #f8f4ee;
+    --gray: #aaa;
+    --radius: 18px;
+    --glow: 0 0 40px rgba(245,166,35,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(14px);
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+  }
+  .nav-brand {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000; font-weight: 700; font-size: 0.78rem;
+    padding: 9px 18px; border-radius: 50px; border: none;
+    cursor: pointer; letter-spacing: 0.5px;
+    text-decoration: none; display: inline-block;
+    box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:active { transform: scale(0.96); }
+
+  /* ── HERO / RESELLER ── */
+  .hero {
+    min-height: 100svh;
+    padding: 100px 20px 60px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 0%, rgba(245,166,35,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(245,166,35,0.08) 0%, transparent 50%),
+                var(--black);
+  }
+  .hero-grain {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  .hero-content { position: relative; z-index: 2; }
+
+  .reseller-card {
+    background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(245,166,35,0.04));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 36px;
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.8s ease both;
+    box-shadow: var(--glow);
+  }
+  .reseller-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .reseller-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4);
+    border-radius: 50px; padding: 5px 14px;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+  }
+  .reseller-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 1.5s infinite; }
+  .reseller-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1; color: var(--white); margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  .reseller-name em { color: var(--gold); font-style: normal; }
+  .reseller-details { display: flex; flex-direction: column; gap: 12px; }
+  .detail-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .detail-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .detail-label { font-size: 0.7rem; color: var(--gray); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+  .detail-value { font-size: 1rem; font-weight: 700; color: var(--white); }
+  .partner-code .detail-value { color: var(--gold); font-size: 1.3rem; letter-spacing: 3px; }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.8rem, 12vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-headline .gold { color: var(--gold); }
+  .hero-sub {
+    font-size: 0.95rem; line-height: 1.65; color: #bbb;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .tag {
+    padding: 7px 14px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 600;
+    border: 1px solid rgba(245,166,35,0.3);
+    color: var(--gold-light); background: rgba(245,166,35,0.08);
+  }
+  .hero-btns {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.55s ease both;
+  }
+  .btn-primary {
+    flex: 1; min-width: 140px;
+    padding: 16px 24px; border-radius: 50px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000; font-weight: 800; font-size: 0.9rem;
+    border: none; cursor: pointer; text-align: center;
+    box-shadow: 0 8px 30px rgba(245,166,35,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-secondary {
+    flex: 1; min-width: 140px;
+    padding: 16px 24px; border-radius: 50px;
+    background: transparent;
+    border: 1.5px solid rgba(245,166,35,0.4);
+    color: var(--gold); font-weight: 700; font-size: 0.9rem;
+    cursor: pointer; text-align: center;
+    transition: background 0.2s;
+    text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-secondary:active { background: rgba(245,166,35,0.1); }
+
+  /* ── STATS ── */
+  .stats-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: rgba(245,166,35,0.1);
+    border-radius: var(--radius); overflow: hidden; margin: 0 20px 60px;
+  }
+  .stat-box {
+    background: var(--dark2); padding: 22px 12px; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem; color: var(--gold); line-height: 1;
+    display: block;
+  }
+  .stat-label { font-size: 0.68rem; color: var(--gray); font-weight: 500; margin-top: 4px; display: block; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 60px 20px; }
+  .section-tag {
+    display: inline-block; font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25);
+    padding: 6px 14px; border-radius: 50px; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.2rem, 9vw, 3.5rem);
+    line-height: 1; letter-spacing: 1px; margin-bottom: 14px;
+  }
+  .section-title .gold { color: var(--gold); }
+  .section-desc { font-size: 0.92rem; line-height: 1.7; color: #bbb; margin-bottom: 32px; }
+
+  /* ── WHAT IS LEADZIN ── */
+  .what-grid { display: flex; flex-direction: column; gap: 16px; }
+  .what-card {
+    background: var(--dark2); border-radius: var(--radius);
+    padding: 24px; border: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .what-card:active { transform: scale(0.98); }
+  .what-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .what-card:hover::after { transform: scaleX(1); }
+  .what-icon { font-size: 2rem; margin-bottom: 12px; }
+  .what-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .what-card p { font-size: 0.85rem; line-height: 1.65; color: #999; }
+
+  .founder-quote {
+    background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(245,166,35,0.03));
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: var(--radius); padding: 28px 24px;
+    margin-top: 24px; position: relative;
+  }
+  .founder-quote::before {
+    content: '"';
+    font-family: 'Bebas Neue', cursive;
+    font-size: 8rem; line-height: 1;
+    color: rgba(245,166,35,0.12);
+    position: absolute; top: -10px; left: 16px;
+  }
+  .founder-quote p { font-size: 0.88rem; line-height: 1.75; color: #ccc; margin-bottom: 16px; font-style: italic; }
+  .founder-quote cite { font-size: 0.8rem; color: var(--gold); font-style: normal; font-weight: 600; }
+
+  /* ── HOW TO EARN ── */
+  .earn-section { background: var(--dark2); }
+  .income-grid { display: flex; flex-direction: column; gap: 16px; }
+  .income-card {
+    background: var(--dark3);
+    border-radius: var(--radius); padding: 22px;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 18px; align-items: flex-start;
+    position: relative; overflow: hidden;
+  }
+  .income-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+    border-radius: 0 3px 3px 0;
+  }
+  .income-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem; color: rgba(245,166,35,0.2); line-height: 1;
+    flex-shrink: 0; min-width: 36px;
+  }
+  .income-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+  .income-content p { font-size: 0.82rem; line-height: 1.6; color: #999; }
+  .income-tag {
+    display: inline-block; margin-top: 8px;
+    font-size: 0.68rem; font-weight: 600; padding: 4px 10px;
+    background: rgba(245,166,35,0.12); border-radius: 50px; color: var(--gold);
+  }
+
+  /* ── PACKAGES ── */
+  .packages-section { background: var(--black); }
+  .pkg-cards { display: flex; flex-direction: column; gap: 20px; }
+  .pkg-card {
+    border-radius: var(--radius); padding: 28px 24px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--dark2);
+    transition: transform 0.3s;
+  }
+  .pkg-card.featured {
+    background: linear-gradient(135deg, #1a1200, #241800);
+    border-color: var(--gold);
+    box-shadow: var(--glow);
+  }
+  .pkg-card:active { transform: scale(0.99); }
+  .featured-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--gold); color: #000;
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 1px;
+    padding: 5px 12px; border-radius: 50px; text-transform: uppercase;
+  }
+  .pkg-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem; letter-spacing: 2px; color: var(--white);
+    margin-bottom: 6px;
+  }
+  .pkg-card.featured .pkg-name { color: var(--gold); }
+  .pkg-price {
+    margin-bottom: 18px;
+  }
+  .pkg-price .original { font-size: 0.9rem; color: var(--gray); text-decoration: line-through; }
+  .pkg-price .current {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.2rem; color: var(--gold); letter-spacing: 1px;
+  }
+  .pkg-features { list-style: none; margin-bottom: 22px; }
+  .pkg-features li {
+    font-size: 0.84rem; color: #ccc; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .pkg-features li::before { content: '✦'; color: var(--gold); font-size: 0.7rem; margin-top: 3px; flex-shrink: 0; }
+  .pkg-btn {
+    width: 100%; padding: 15px; border-radius: 50px;
+    font-weight: 700; font-size: 0.9rem; border: none;
+    cursor: pointer; letter-spacing: 0.5px;
+    background: var(--dark3); color: var(--gold);
+    border: 1.5px solid rgba(245,166,35,0.4);
+    transition: background 0.2s;
+  }
+  .pkg-card.featured .pkg-btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000; border: none;
+    box-shadow: 0 6px 24px rgba(245,166,35,0.4);
+  }
+  /* ── COUPONS ── */
+.coupon-section { background: var(--dark2); }
+
+.coupon-limited-banner {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(90deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05));
+  border: 1px solid rgba(245,166,35,0.3);
+  border-radius: 50px; padding: 10px 18px;
+  font-size: 0.78rem; font-weight: 600; color: var(--gold);
+  margin-bottom: 28px; width: fit-content;
+  letter-spacing: 0.3px;
+}
+.blink-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ff4444; flex-shrink: 0;
+  animation: pulse 1s infinite;
+}
+
+.coupon-grid { display: flex; flex-direction: column; gap: 20px; }
+
+.coupon-card {
+  background: var(--dark3); border-radius: var(--radius);
+  padding: 24px; border: 1px solid rgba(255,255,255,0.07);
+  position: relative; overflow: hidden;
+}
+.coupon-card.featured-coupon {
+  background: linear-gradient(135deg, #1a1200, #201600);
+  border-color: var(--gold);
+  box-shadow: var(--glow);
+}
+.coupon-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245,166,35,0.4), transparent);
+}
+.coupon-card.featured-coupon::before {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.coupon-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.coupon-pkg-name {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.6rem; letter-spacing: 2px; color: var(--white);
+}
+.featured-coupon .coupon-pkg-name { color: var(--gold); }
+.coupon-badge {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.8px;
+  padding: 5px 12px; border-radius: 50px; text-transform: uppercase;
+  background: var(--gold); color: #000;
+}
+
+.coupon-pricing {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px;
+}
+.coupon-before {
+  font-size: 1.1rem; color: #666;
+  text-decoration: line-through;
+}
+.coupon-arrow { color: var(--gold); font-size: 1rem; }
+.coupon-after {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem; color: var(--gold); letter-spacing: 1px;
+}
+
+.coupon-savings {
+  font-size: 0.78rem; color: #4ade80; font-weight: 600;
+  margin-bottom: 18px;
+  background: rgba(74,222,128,0.1); display: inline-block;
+  padding: 4px 12px; border-radius: 50px;
+}
+
+.coupon-box {
+  background: rgba(0,0,0,0.4); border: 1.5px dashed rgba(245,166,35,0.5);
+  border-radius: 14px; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 4px;
+  cursor: pointer; position: relative; overflow: hidden;
+  margin-bottom: 12px;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.coupon-box:active { background: rgba(245,166,35,0.08); border-color: var(--gold); }
+.coupon-label { font-size: 0.65rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+.coupon-code {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem; letter-spacing: 4px; color: var(--white);
+}
+.copy-hint { font-size: 0.7rem; color: var(--gold); font-weight: 600; }
+
+.coupon-box.copied { border-color: #4ade80; background: rgba(74,222,128,0.06); }
+.coupon-box.copied .coupon-code { color: #4ade80; }
+.coupon-box.copied .copy-hint::after { content: ' Copied! ✓'; }
+
+.coupon-note {
+  font-size: 0.72rem; color: #555;
+}
+
+.coupon-footer-note {
+  margin-top: 28px; padding: 18px 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  font-size: 0.8rem; line-height: 1.7; color: #777;
+}
+
+  /* ── WHY LEADZIN ── */
+  .why-section { background: var(--dark2); }
+  .why-grid { display: flex; flex-direction: column; gap: 16px; }
+  .why-card {
+    background: var(--dark3); border-radius: var(--radius);
+    padding: 22px; display: flex; gap: 18px; align-items: flex-start;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .why-icon-wrap {
+    width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(245,166,35,0.2), rgba(245,166,35,0.05));
+    border: 1px solid rgba(245,166,35,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+  .why-card p { font-size: 0.83rem; line-height: 1.65; color: #999; }
+
+  /* ── TRIPS ── */
+  .trips-section { background: var(--black); }
+  .trips-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .trips-scroll::-webkit-scrollbar { display: none; }
+  .trip-card {
+    flex-shrink: 0; width: 160px; border-radius: 16px;
+    background: var(--dark3); border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden; text-align: center; padding-bottom: 16px;
+  }
+  .trip-emoji { font-size: 2.5rem; padding: 22px 0 10px; display: block; }
+  .trip-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.1rem; letter-spacing: 1.5px; color: var(--gold);
+  }
+
+  /* ── CONTACT / CTA ── */
+  .contact-section {
+    background: linear-gradient(135deg, #120d00, #0a0a0a);
+    border-top: 1px solid rgba(245,166,35,0.15);
+    text-align: center;
+  }
+  .contact-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(245,166,35,0.02));
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: var(--radius); padding: 32px 24px;
+    max-width: 500px; margin: 0 auto;
+    box-shadow: var(--glow);
+  }
+  .contact-box .section-title { font-size: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .contact-row {
+    display: flex; gap: 16px; align-items: center;
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px; padding: 16px;
+    text-decoration: none; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: border-color 0.2s;
+  }
+  .contact-row:active { border-color: var(--gold); }
+  .c-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .c-label { font-size: 0.68rem; color: var(--gray); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+  .c-value { font-size: 0.95rem; font-weight: 700; }
+  .partner-highlight .c-value { color: var(--gold); font-size: 1.2rem; letter-spacing: 2px; }
+  .enroll-btn {
+    width: 100%; padding: 18px; border-radius: 50px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000; font-weight: 800; font-size: 1rem;
+    border: none; cursor: pointer; letter-spacing: 0.5px;
+    box-shadow: 0 8px 30px rgba(245,166,35,0.45);
+    margin-top: 8px;
+    transition: transform 0.2s;
+  }
+  .enroll-btn:active { transform: scale(0.97); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060606; padding: 28px 20px;
+    text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-brand {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem; letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  footer p { font-size: 0.78rem; color: #555; line-height: 1.7; }
+  footer .gold-text { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(245,166,35,0.2); }
+    50% { box-shadow: 0 0 50px rgba(245,166,35,0.5); }
+  }
+
+  .fade-in {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  .reseller-card { animation: glow-pulse 3s ease infinite; }
+
+  /* Scroll progress */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 9999; transition: width 0.1s;
+    width: 0%;
+  }
+
+  /* Floating WhatsApp */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 20px; z-index: 998;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25d366; display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+    text-decoration: none; animation: float 3s ease infinite;
+    transition: transform 0.2s;
+  }
+  .wa-float:active { transform: scale(0.9); }
+
+  .know-more {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #888;
+}
+.know-more a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(245,166,35,0.4);
+  padding-bottom: 1px;
+}
+  /* divider */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,166,35,0.3), transparent);
+    margin: 0 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- scroll progress -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">LeadzIn</span>
+  <a href="#contact" class="nav-cta">Enroll Now ↗</a>
+</nav>
+
+<!-- WhatsApp float -->
+<a href="tel:+919824340261" class="wa-float" aria-label="Call now">📞</a>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+
+    <!-- RESELLER CARD -->
+     <div class="reseller-card">
+      <div class="reseller-badge"><span></span> Authorized Partner</div>
+      <div class="reseller-name">Burhan <em>Challawala</em></div>
+        <div class="contact-items">
+        <div class="contact-row">
+            <div class="c-icon">👤</div>
+            <div>
+            <div class="c-label">Your Partner</div>
+            <div class="c-value">Burhan Challawala</div>
+            </div>
+        </div>
+        <a href="tel:+919824340261" class="contact-row">
+            <div class="c-icon">📱</div>
+            <div>
+            <div class="c-label">Call / WhatsApp</div>
+            <div class="c-value">+91 98243 40261</div>
+            </div>
+        </a>
+        <a href="https://www.instagram.com/burhanbsc53" target="_blank" class="contact-row">
+            <div class="c-icon">📸</div>
+            <div>
+            <div class="c-label">Instagram</div>
+            <div class="c-value">@burhanbsc53</div>
+            </div>
+        </a>
+        <a href="https://www.facebook.com/share/1at84gDnC1/" target="_blank" class="contact-row">
+            <div class="c-icon">👥</div>
+            <div>
+            <div class="c-label">Facebook</div>
+            <div class="c-value">Burhan Challawala</div>
+            </div>
+        </a>
+        <div class="contact-row partner-highlight">
+            <div class="c-icon">🔑</div>
+            <div>
+            <div class="c-label">Partner Code (use while enrolling)</div>
+            <div class="c-value">51463</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- HEADLINE -->
+    <h1 class="hero-headline">
+      Learn.<br><span class="gold">Earn.</span><br>Travel.
+    </h1>
+    <p class="hero-sub">
+      Join India's fastest-growing Ed-Tech & online business platform. Build multiple income streams, master in-demand digital skills, and unlock a life of financial freedom.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">📚 18+ Programs</span>
+      <span class="tag">💸 7 Income Streams</span>
+      <span class="tag">✈️ International Trips</span>
+      <span class="tag">🎓 Lifetime Access</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">🚀 Enroll Now</a>
+      <a href="#packages" class="btn-secondary">View Packages</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip fade-in">
+  <div class="stat-box">
+    <span class="stat-num" data-target="50000">0</span>
+    <span class="stat-label">Learners</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-num" data-target="200">0</span>
+    <span class="stat-label">Cities</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-num" data-target="7">0</span>
+    <span class="stat-label">Income Streams</span>
+  </div>
+</div>
+
+<div class="gold-divider"></div>
+
+<!-- ══════════════════ WHAT IS LEADZIN ══════════════════ -->
+<section id="about">
+  <span class="section-tag">About LeadzIn</span>
+  <h2 class="section-title fade-in">What is <span class="gold">LeadzIn?</span></h2>
+  <p class="section-desc fade-in">
+    LeadzIn is a leading Ed-Tech company with various other tech sectors — here to make your learning journey into a thriving online business as smooth and rewarding as possible.
+  </p>
+
+  <div class="what-grid">
+    <div class="what-card fade-in">
+      <div class="what-icon">🏢</div>
+      <h3>About the Company</h3>
+      <p>Founded and led by <strong>Hussain Khalil</strong> (11-time Top Performer, featured in Times of India), LeadzIn delivers best-in-class, customised business packages and educational programs aligned with today's digital era.</p>
+    </div>
+    <div class="what-card fade-in">
+      <div class="what-icon">🎯</div>
+      <h3>Our Mission</h3>
+      <p>To empower students, housewives, professionals, and entrepreneurs to start online businesses in various tech fields — with guided training, proven systems, and community support.</p>
+    </div>
+    <div class="what-card fade-in">
+      <div class="what-icon">⚡</div>
+      <h3>What Makes Us Different</h3>
+      <p>Comprehensive education + real income opportunities. Not just courses — complete business ecosystems with drop-shipping, AI tools, travel businesses, website building, and more, all under one roof.</p>
+    </div>
+    <div class="what-card fade-in">
+      <div class="what-icon">💡</div>
+      <h3>Who Is It For?</h3>
+      <p>Students seeking financial independence. Housewives wanting flexible income. Professionals diversifying earnings. Anyone ready to build a 6-figure online business from scratch.</p>
+    </div>
+  </div>
+
+  <div class="founder-quote fade-in">
+    <p>"At LeadzIn, our mission is simple yet profound: to empower everyone to start an online business in various tech fields. We believe the digital era presents unprecedented opportunities, and our goal is to make these opportunities accessible to all."</p>
+    <cite>— Hussain Khalil, Founder & CEO, LeadzIn</cite>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══════════════════ HOW TO EARN ══════════════════ -->
+<section id="earn" class="earn-section">
+  <span class="section-tag">Income Opportunities</span>
+  <h2 class="section-title fade-in">7 Ways to <span class="gold">Earn Online</span></h2>
+  <p class="section-desc fade-in">
+    LeadzIn isn't just learning — it's a full ecosystem of earning. Here are the 7 powerful income streams you unlock:
+  </p>
+
+  <div class="income-grid">
+  <div class="income-card fade-in">
+    <div class="income-num">01</div>
+    <div class="income-content">
+      <h3>🚀 Drop Shipping (LeadzInKart)</h3>
+      <p>Start your e-commerce business with zero inventory. Access 5,000+ unique products, set your own prices, and keep 100% of the profit — no storage, no hassle.</p>
+      <span class="income-tag">Zero Inventory</span>
+      <div class="know-more">💬 Want to know how to start? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">02</div>
+    <div class="income-content">
+      <h3>🧱 Website Builder (Buildzin)</h3>
+      <p>Launch your own web agency under your own branding, domain & logo. Build websites for clients and pocket 100% of every rupee you earn.</p>
+      <span class="income-tag">100% Profit</span>
+      <div class="know-more">💬 Curious how it works? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">03</div>
+    <div class="income-content">
+      <h3>🤖 AI WhatsApp Chatbot</h3>
+      <p>White-label your own AI WhatsApp automation chatbot. Sell it to local businesses, build your brand, and generate a steady recurring monthly income.</p>
+      <span class="income-tag">Recurring Revenue</span>
+      <div class="know-more">💬 Ready to get started? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">04</div>
+    <div class="income-content">
+      <h3>✈️ Travel Business (Tripzin)</h3>
+      <p>Become a certified travel agent with your own branding and logo. Book tours, earn commissions, and grow a full-scale travel business from your phone.</p>
+      <span class="income-tag">Own Brand</span>
+      <div class="know-more">💬 Want to be a travel entrepreneur? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">05</div>
+    <div class="income-content">
+      <h3>📇 Hello Card Business</h3>
+      <p>Resell digital visiting cards to professionals and businesses. Simple to run, easy to scale, and in extremely high demand across every industry.</p>
+      <span class="income-tag">High Demand</span>
+      <div class="know-more">💬 Want to tap this market? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">06</div>
+    <div class="income-content">
+      <h3>💼 Freelancing & Digital Services</h3>
+      <p>Get certified in Social Media Management, Canva Design, Facebook Ads, Email Marketing, and more — then offer those skills to clients worldwide.</p>
+      <span class="income-tag">Work From Anywhere</span>
+      <div class="know-more">💬 Not sure which skill to start with? <a href="#contact">Contact Burhan →</a></div>
+    </div>
+  </div>
+  <div class="income-card fade-in">
+    <div class="income-num">07</div>
+    <div class="income-content">
+      <h3>🔄 Reselling LeadzIn Packages</h3>
+      <p>Refer others to LeadzIn using your partner code and earn generous commissions on every sale. Weekly payouts with truly unlimited earning potential.</p>
+      <span class="income-tag">Weekly Payments</span>
+      <div class="know-more">💬 Want to earn like Burhan does? <a href="#contact">Contact Now →</a></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══════════════════ PACKAGES ══════════════════ -->
+<section id="packages" class="packages-section">
+  <span class="section-tag">Pricing Plans</span>
+  <h2 class="section-title fade-in">Choose Your <span class="gold">Package</span></h2>
+  <p class="section-desc fade-in">
+    Pick the plan that fits your goals. Every package comes with lifetime access, live training, and real earning opportunities.
+  </p>
+
+  <div class="pkg-cards">
+
+    <!-- CLASSIC -->
+    <div class="pkg-card fade-in">
+      <div class="pkg-name">Classic</div>
+      <div class="pkg-price">
+        <span class="original">₹3,999</span><br>
+        <span class="current" style="font-size:1.7rem;">₹1,999</span>
+      </div>
+      <ul class="pkg-features">
+        <li>2 Income Streams</li>
+        <li>4+ Programs</li>
+        <li>Community Support</li>
+        <li>Certificate of Completion</li>
+      </ul>
+      <a href="https://leadzin.in/cart/?add-to-cart=23219" target="_blank" style="text-decoration:none;">
+  <button class="pkg-btn">Get Classic →</button>
+</a>
+
+    </div>
+
+    <!-- ULTIMATE -->
+    <div class="pkg-card fade-in">
+      <div class="pkg-name">Ultimate</div>
+      <div class="pkg-price">
+        <span class="original">₹4,999</span><br>
+        <span class="current" style="font-size:1.7rem;">₹2,999</span>
+      </div>
+      <ul class="pkg-features">
+        <li>4 Income Streams</li>
+        <li>6+ Programs</li>
+        <li>E-Commerce Setup</li>
+        <li>Certificate of Completion</li>
+        <li>Community Support</li>
+      </ul>
+      <a href="https://leadzin.in//checkout/?add-to-cart=23212" target="_blank" style="text-decoration:none;">
+  <button class="pkg-btn">Get Ultimate →</button>
+</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pkg-card fade-in">
+      <div class="pkg-name">Premium</div>
+      <div class="pkg-price">
+        <span class="original">₹9,999</span><br>
+        <span class="current" style="font-size:1.7rem;">₹5,999</span>
+      </div>
+      <ul class="pkg-features">
+        <li>5 Income Streams</li>
+        <li>9+ Programs</li>
+        <li>Certificate of Completion</li>
+        <li>Community Support</li>
+        <li>E-Books & Resources</li>
+        <li>Live Training Access</li>
+      </ul>
+      <a href="https://leadzin.in//checkout/?add-to-cart=23201" target="_blank" style="text-decoration:none;">
+  <button class="pkg-btn">Get Premium →</button>
+</a>
+    </div>
+    <!-- SUPREME -->
+    <div class="pkg-card featured fade-in">
+      <span class="featured-badge">⭐ Best Value</span>
+      <div class="pkg-name">Supreme</div>
+      <div class="pkg-price">
+        <span class="original">₹22,500</span><br>
+        <span class="current">₹14,999</span>
+      </div>
+      <ul class="pkg-features">
+        <li>7+ Income Streams</li>
+        <li>18+ Programs (150+ Lessons)</li>
+        <li>Lifetime Access</li>
+        <li>Drop Shipping with 5,000+ Products</li>
+        <li>All White-Label Solutions</li>
+        <li>Certificate of Completion</li>
+        <li>10+ E-Books</li>
+        <li>Weekly Payments</li>
+        <li>FREE Reels & Canva Content</li>
+        <li>Live Training Access</li>
+      </ul>
+      <a href="https://leadzin.in//checkout/?add-to-cart=23192" target="_blank" style="text-decoration:none;">
+        <button class="pkg-btn">Get Supreme →</button>
+        </a>
+    </div>
+
+
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+<!-- ══════════════════ COUPONS ══════════════════ -->
+<section id="coupons" class="coupon-section">
+  <div class="coupon-limited-banner">
+    <span class="blink-dot"></span> Limited Time Offer — Grab Your Discount Before It's Gone!
+  </div>
+  <span class="section-tag">Exclusive Coupons</span>
+  <h2 class="section-title fade-in">Save More with <span class="gold">Partner Codes</span></h2>
+  <p class="section-desc fade-in">
+    Use these exclusive coupon codes — shared by Burhan Challawala — to unlock special discounts on your chosen package. Apply at checkout and watch the price drop instantly.
+  </p>
+
+  <div class="coupon-grid">
+    <!-- CLASSIC -->
+    <div class="coupon-card fade-in">
+      <div class="coupon-top">
+        <div class="coupon-pkg-name">Classic</div>
+        <span class="coupon-badge" style="background:rgba(255,255,255,0.08);color:#ccc;">Starter</span>
+      </div>
+      <div class="coupon-pricing">
+        <span class="coupon-before">₹1,999</span>
+        <span class="coupon-arrow">→</span>
+        <span class="coupon-after">₹999</span>
+      </div>
+      <!-- <div class="coupon-savings">You save ₹1,000 (25% OFF)</div> -->
+      <div class="coupon-box" onclick="copyCoupon(this, 'classic53')">
+        <span class="coupon-label">Coupon Code</span>
+        <span class="coupon-code">classic53</span>
+        <span class="copy-hint">Tap to Copy 📋</span>
+      </div>
+      <div class="coupon-note">Apply at LeadzIn checkout · Limited seats available</div>
+    </div>
+        <!-- ULTIMATE -->
+
+     <div class="coupon-card fade-in">
+      <div class="coupon-top">
+        <div class="coupon-pkg-name">Ultimate</div>
+        <span class="coupon-badge" style="background:rgba(255,255,255,0.08);color:#ccc;">Value Pick</span>
+      </div>
+      <div class="coupon-pricing">
+        <span class="coupon-before">₹2,999</span>
+        <span class="coupon-arrow">→</span>
+        <span class="coupon-after">1,₹999</span>
+      </div>
+      <!-- <div class="coupon-savings">You save ₹1,500 (21% OFF)</div> -->
+      <div class="coupon-box" onclick="copyCoupon(this, 'ultimate53')">
+        <span class="coupon-label">Coupon Code</span>
+        <span class="coupon-code">ultimate53</span>
+        <span class="copy-hint">Tap to Copy 📋</span>
+      </div>
+      <div class="coupon-note">Apply at LeadzIn checkout · Limited seats available</div>
+    </div>
+    <!-- PREMIUM -->
+    <div class="coupon-card fade-in">
+      <div class="coupon-top">
+        <div class="coupon-pkg-name">Premium</div>
+        <span class="coupon-badge" style="background:rgba(255,255,255,0.08);color:#ccc;">Popular</span>
+      </div>
+      <div class="coupon-pricing">
+        <span class="coupon-before">₹9,999</span>
+        <span class="coupon-arrow">→</span>
+        <span class="coupon-after">₹4,999</span>
+      </div>
+      <!-- <div class="coupon-savings">You save ₹2,500 (25% OFF)</div> -->
+      <div class="coupon-box" onclick="copyCoupon(this, 'premium53')">
+        <span class="coupon-label">Coupon Code</span>
+        <span class="coupon-code">premium53</span>
+        <span class="copy-hint">Tap to Copy 📋</span>
+      </div>
+      <div class="coupon-note">Apply at LeadzIn checkout · Limited seats available</div>
+    </div>
+    <!-- SUPREME -->
+    <div class="coupon-card featured-coupon fade-in">
+      <div class="coupon-top">
+        <div class="coupon-pkg-name">Supreme</div>
+        <span class="coupon-badge">⭐ Best Deal</span>
+      </div>
+      <div class="coupon-pricing">
+        <span class="coupon-before">₹14,999</span>
+        <span class="coupon-arrow">→</span>
+        <span class="coupon-after">₹9,999</span>
+      </div>
+      <!-- <div class="coupon-savings">You save ₹7,501 (33% OFF)</div> -->
+      <div class="coupon-box" onclick="copyCoupon(this, 'supreme53')">
+        <span class="coupon-label">Coupon Code</span>
+        <span class="coupon-code">supreme53</span>
+        <span class="copy-hint">Tap to Copy 📋</span>
+      </div>
+      <div class="coupon-note">Apply at LeadzIn checkout · Limited seats available</div>
+    </div>
+
+  </div>
+
+  <div class="coupon-footer-note fade-in">
+     Prices and availability may change without notice. <a href="#contact" style="color:var(--gold);">Contact Burhan</a> to confirm before purchasing.
+  </div>
+</section>
+<!-- ══════════════════ WHY LEADZIN ══════════════════ -->
+<section class="why-section">
+  <span class="section-tag">Why Choose Us</span>
+  <h2 class="section-title fade-in">Why <span class="gold">LeadzIn</span> is Different</h2>
+  <p class="section-desc fade-in">Thousands of learners choose LeadzIn every month. Here's why:</p>
+
+  <div class="why-grid">
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">🏆</div>
+      <div>
+        <h3>Award-Winning Leadership</h3>
+        <p>Founder Hussain Khalil has been awarded 11 times as Top Performer and featured in Times of India. You're learning from the best.</p>
+      </div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">💰</div>
+      <div>
+        <h3>Real Income, Not Just Courses</h3>
+        <p>Every package comes with actual business tools — drop-shipping portals, AI chatbot licenses, travel agency setups — not just video lessons.</p>
+      </div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">♾️</div>
+      <div>
+        <h3>Lifetime Access</h3>
+        <p>Pay once, learn forever. All programs are accessible 24/7 on both mobile and laptop. New content is added regularly.</p>
+      </div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">🌍</div>
+      <div>
+        <h3>Global Reach (200+ Cities)</h3>
+        <p>An active community across 200+ cities in India and internationally. Network, grow, and collaborate with like-minded entrepreneurs.</p>
+      </div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">✈️</div>
+      <div>
+        <h3>Sponsored International Trips</h3>
+        <p>Top performers get fully-sponsored international trips — Dubai, Vietnam, Malaysia, Azerbaijan, Singapore, Goa, and more!</p>
+      </div>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon-wrap">🤝</div>
+      <div>
+        <h3>Weekly Payouts</h3>
+        <p>Earn and get paid every week. No delays, no drama. Your commissions arrive on time, every time, directly to your account.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══════════════════ TRIPS ══════════════════ -->
+<section class="trips-section">
+  <span class="section-tag">Rewards & Travel</span>
+  <h2 class="section-title fade-in">Sponsored <span class="gold">Trips</span></h2>
+  <p class="section-desc fade-in">
+    Achieve your targets and LeadzIn sends you on international trips — fully sponsored!
+  </p>
+  <div class="trips-scroll">
+    <div class="trip-card"><span class="trip-emoji">🇦🇪</span><span class="trip-name">Dubai</span></div>
+    <div class="trip-card"><span class="trip-emoji">🇻🇳</span><span class="trip-name">Vietnam</span></div>
+    <div class="trip-card"><span class="trip-emoji">🇲🇾</span><span class="trip-name">Malaysia</span></div>
+    <div class="trip-card"><span class="trip-emoji">🇦🇿</span><span class="trip-name">Azerbaijan</span></div>
+    <div class="trip-card"><span class="trip-emoji">🇸🇬</span><span class="trip-name">Singapore</span></div>
+    <div class="trip-card"><span class="trip-emoji">🏖️</span><span class="trip-name">Goa</span></div>
+    <div class="trip-card"><span class="trip-emoji">🌏</span><span class="trip-name">And More</span></div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ══════════════════ CONTACT / CTA ══════════════════ -->
+<section id="contact" class="contact-section">
+  <div class="contact-box fade-in">
+    <span class="section-tag">Get Started Today</span>
+    <h2 class="section-title">Ready to <span class="gold">Enroll?</span></h2>
+    <p style="font-size:0.88rem; color:#bbb; margin-bottom:4px;">
+      Contact your authorized LeadzIn partner to enroll and start your journey to financial freedom.
+    </p>
+
+    <div class="contact-items">
+      <div class="contact-row">
+        <div class="c-icon">👤</div>
+        <div>
+          <div class="c-label">Your Partner</div>
+          <div class="c-value">Burhan Challawala</div>
+        </div>
+      </div>
+      <a href="tel:+919824340261" class="contact-row">
+        <div class="c-icon">📱</div>
+        <div>
+          <div class="c-label">Call / WhatsApp</div>
+          <div class="c-value">+91 98243 40261</div>
+        </div>
+      </a>
+      <div class="contact-row partner-highlight">
+        <div class="c-icon">🔑</div>
+        <div>
+          <div class="c-label">Partner Code (use while enrolling)</div>
+          <div class="c-value">51463</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="tel:+919824340261">
+      <button class="enroll-btn">📞 Call to Enroll Now</button>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">LeadzIn</div>
+  <p>We Learn • We Earn • We Travel</p>
+  <p style="margin-top:10px;">Presented by <span class="gold-text">Burhan Challawala</span> | Partner Code: <span class="gold-text">51463</span></p>
+  <p style="margin-top:12px;">LeadzIn is an Ed-Tech company empowering individuals to build online businesses and achieve financial freedom.</p>
+  <!-- <p style="margin-top:12px;">GSTIN: 27AAFCL1245C1ZX &nbsp;·&nbsp; contact@leadzin.in</p> -->
+  <p style="margin-top:12px; font-size:0.7rem; color:#333;">Copyright © 2021–2026 LeadzIn. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll progress bar
+  // Prevent auto-scroll to hash on page load
+if (window.location.hash) {
+  history.replaceState(null, null, window.location.pathname);
+}
+window.addEventListener('load', () => {
+  document.documentElement.setAttribute('data-scrolled', 'true');
+});
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrollTop / docHeight) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // Intersection observer for fade-in
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Counter animation
+  function animateCounter(el, target) {
+    const suffix = target >= 1000 ? 'K+' : '+';
+    const displayTarget = target >= 1000 ? target / 1000 : target;
+    let start = 0;
+    const step = displayTarget / 50;
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= displayTarget) {
+        el.textContent = displayTarget + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start) + suffix;
+      }
+    }, 30);
+  }
+  function copyCoupon(el, code) {
+  navigator.clipboard.writeText(code).catch(() => {});
+  el.classList.add('copied');
+  el.querySelector('.copy-hint').textContent = '✓ Copied!';
+  setTimeout(() => {
+    el.classList.remove('copied');
+    el.querySelector('.copy-hint').textContent = 'Tap to Copy 📋';
+  }, 2500);
+}
+  const statNums = document.querySelectorAll('.stat-num[data-target]');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target, +entry.target.dataset.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => statObserver.observe(el));
+</script>
+</body>
+</html>
